@@ -1,24 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 
 function App() {
+  const [title, setTitle] = useState('child');
+  const [show, setShow] = useState(false);
+  const ngChildRef = useRef(null);
+  const reactChildRef = useRef(title);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>root</h1>
+      <input onChange={(e) => setTitle(e?.target?.value)} />
+      <button onClick={() => setShow(!show)}>Mostrar</button>
+      { show && <react-child title={title} ></react-child> }
+      {/* { show && <ng-child ref={ngChildRef} title={title}></ng-child>} */}
     </div>
   );
 }
